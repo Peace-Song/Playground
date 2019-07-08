@@ -3,9 +3,10 @@
 #include <stdlib.h>
 
 int main(){
-    srand((unsigned)time(NULL));
-    printf("Current timestamp is: %d\n", (unsigned)time(NULL));
-    printf("Random integer is: %d\n", rand());
+    int arr[5] = {2, 3, 5, 7, 11};
+
+    printf("arr[1] == %d\n", arr[1]);
+    printf("*(arr + 1) == %d\n", *(arr + 1));
 
     return 0;
 }
