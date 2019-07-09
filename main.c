@@ -1,14 +1,34 @@
 #include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
+
+
+void pswap(int** p1, int** p2);
 
 int main(){
-    int arr[5] = {2, 3, 5, 7, 11};
+    int a = 10, b = 20;
+    int *pa;
+    int *pb;
+    pa = &b;
+    pb = &a;
+    
+    int **ppa = &pa;
+    int **ppb = &pb;
+    
+    printf("pa == %ld\n", (long int)pa);
+    printf("pb == %ld\n", (long int)pb);
 
-    printf("arr[1] == %d\n", arr[1]);
-    printf("*(arr + 1) == %d\n", *(arr + 1));
+    pswap(ppa, ppb);
+
+    printf("pa == %ld\n", (long int)pa);
+    printf("pb == %ld\n", (long int)pb);
 
     return 0;
+}
+
+void pswap(int** p1, int** p2){
+    int* temp;
+    temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
 }
 
         
