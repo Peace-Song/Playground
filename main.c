@@ -1,34 +1,43 @@
 #include <stdio.h>
 
-
-void pswap(int** p1, int** p2);
-
 int main(){
-    int a = 10, b = 20;
-    int *pa;
-    int *pb;
-    pa = &b;
-    pb = &a;
-    
-    int **ppa = &pa;
-    int **ppb = &pb;
-    
-    printf("pa == %ld\n", (long int)pa);
-    printf("pb == %ld\n", (long int)pb);
+    char ID[8];
+    char name[10];
+    int i;
+    fputs("Type your 6-digit student ID: ", stdout);
+    fgets(ID, sizeof(ID), stdin);
+   
+    if(ID[sizeof(ID)-1] == '\n') 
+        while(getchar() != '\n');
 
-    pswap(ppa, ppb);
+/*    printf("DEBUG: ");
+    for(i = 0; i < sizeof(ID); i++){
+        if(ID[i] == '\0') printf("\\0");
+        if(ID[i] == '\n') printf("\\n");
+        else printf("%c", ID[i]);
+    }
+    printf("\n");
+    printf("DEBUG: sizeof(ID) == %ld\n", sizeof(ID));
 
-    printf("pa == %ld\n", (long int)pa);
-    printf("pb == %ld\n", (long int)pb);
+    for(i = 0; i < sizeof(ID); i++)
+        if(ID[i] == '\n') 
+            ID[i] = '\0';
+            
+*/
+    fputs("Type your name: ", stdout);
+    fgets(name, sizeof(name), stdin);
+
+    if(name[sizeof(name)-1] == '\n')
+        while(getchar() != '\n');
+
+    for(i = 0; i < sizeof(ID); i++)
+        if(ID[i] == '\n') 
+            ID[i] = '\0';
+
+
+    printf("ID: %s\n", ID);
+    printf("Name: %s\n", name);
 
     return 0;
 }
 
-void pswap(int** p1, int** p2){
-    int* temp;
-    temp = *p1;
-    *p1 = *p2;
-    *p2 = temp;
-}
-
-        
