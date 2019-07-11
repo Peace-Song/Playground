@@ -1,26 +1,33 @@
 import java.util.*;
+import java.math.BigInteger;
 
 class Main{
     public static void main(String[] args){
-        System.out.println("List of prime numbers:");
-        int i = 2;
-        //int linePrintCount = 0;
-        while(true){
-            int count = 0;
-            
-            for(int j = 1; j <= i; j++)
-                if(i % j == 0) count++;
+        Scanner scan = new Scanner(System.in);
 
-            if(count == 2){
-                //if(linePrintCount == 8){
-                //    System.out.println("");
-                //    linePrintCount = 0;
-                //}
-                System.out.print(i + "\n");
-                //linePrintCount++;
+        System.out.println("Input initial integer n.");
+        while(true){
+            String n_str = scan.nextLine();
+            System.out.println("Collatz Conjecture of n == " + n_str);
+
+            BigInteger n = new BigInteger(n_str);
+            
+            int count = 0;
+            System.out.println("n == " + n + "\t\t| count == " + count);
+            while(n.compareTo(BigInteger.valueOf(1)) != 0){
+                if(n.compareTo(BigInteger.valueOf(0)) < 0){
+                    System.out.println("Invalid n.");
+                    break;
+                }
+                if(n.subtract((n.divide(BigInteger.valueOf(2))).multiply(BigInteger.valueOf(2))).compareTo(BigInteger.valueOf(0)) == 0) n = n.divide(BigInteger.valueOf(2));
+                else{
+                    n = n.multiply(BigInteger.valueOf(3));
+                    n = n.add(BigInteger.valueOf(1)); 
+                }
+                count++;
+                System.out.println("n == " + n + "\t\t| count == " + count);
             }
-            i++;
+            System.out.println("Input next integer n.");
         }
-        //System.out.println("Fuck you");
     }
 }
