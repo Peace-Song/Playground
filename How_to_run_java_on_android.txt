@@ -1,0 +1,3 @@
+ecj Hello.java
+dx --dex --output=Hello.dex Hello.class
+dalvikvm -cp Hello.dex Hello`
