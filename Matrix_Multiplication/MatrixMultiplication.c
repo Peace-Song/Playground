@@ -37,6 +37,8 @@ DETERMINE_MATRICES:
         for(j = 0; j < A_row_length; j++)
             scanf("%d", &A[i][j]);
 	
+    printf("\n");
+    
     printf("Input B row vectors:\n");
     for(i = 0; i < B_column_length; i++)
         for(j = 0; j < B_row_length; j++)
