@@ -24,8 +24,8 @@ DETERMINE_MATRICES:
     scanf("%d", &B_column_length);
 
     if(A_row_length != B_column_length){
-	printf("Invalid size of operand matrices.\n");
-	goto DETERMINE_MATRICES;
+	    printf("Invalid size of operand matrices.\n");
+	    goto DETERMINE_MATRICES;
     }
     
     int A[A_column_length][A_row_length];
@@ -34,13 +34,13 @@ DETERMINE_MATRICES:
 
     printf("Input A row vectors:\n");
     for(i = 0; i < A_column_length; i++)
-	for(j = 0; j < A_row_length; j++)
-	    scanf("%d", &A[i][j]);
+        for(j = 0; j < A_row_length; j++)
+            scanf("%d", &A[i][j]);
 	
     printf("Input B row vectors:\n");
     for(i = 0; i < B_column_length; i++)
-	for(j = 0; j < B_row_length; j++)
-	    scanf("%d", &B[i][j]);
+        for(j = 0; j < B_row_length; j++)
+            scanf("%d", &B[i][j]);
 
     mulMatrix(A_row_length, B_row_length, A_column_length, B_column_length, A, B, C);
     printMatrix(A_column_length, B_row_length, C);
