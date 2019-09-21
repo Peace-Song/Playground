@@ -71,6 +71,7 @@ void mulMatrix(int A_row_length, int B_row_length,
 void printMatrix(int M_row_length, int M_column_length, int M[][M_row_length]){
     int i, j;
 
+    printf("Result matrix: \n");
     for(i = 0; i < M_row_length; i++){
         for(j = 0; j < M_column_length; j++){
             printf("%-4d", M[i][j]);
