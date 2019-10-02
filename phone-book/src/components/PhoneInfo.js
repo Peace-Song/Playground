@@ -35,6 +35,16 @@ class PhoneInfo extends Component{
         });
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        if(!this.state.editing
+            && !nextState.editing
+            && nextProps.info === this.props.info){
+                return false;
+            }
+
+        return true;
+    }
+
     componentDidUpdate(prevProps, prevState){
         const {info, onUpdate } = this.props;
 
@@ -54,6 +64,8 @@ class PhoneInfo extends Component{
     }
 
     render(){
+        console.log("render PhoneInfo " + this.props.info.id);
+
         const style = {
             border: "1px solid black",
             padding: "8px",
