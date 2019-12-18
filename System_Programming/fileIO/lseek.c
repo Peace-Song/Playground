@@ -7,13 +7,13 @@ int main(){
     off_t ret_val;
     char read_buffer[1000];
 
-    fd = open("./test.c", O_RDONLY);
+    fd = open("./test.txt", O_RDONLY);
     if(fd < 0){
         printf("open error\n");
         return 1;
     }
 
-    ret_val = lseek(fd, 200, SEEK_SET);
+    ret_val = lseek(fd, 20, SEEK_SET);
     if(ret_val < 0){
         printf("lseek error\n");
         return 1;
