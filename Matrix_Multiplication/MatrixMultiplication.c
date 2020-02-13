@@ -78,7 +78,7 @@ void printMatrix(int M_row_length, int M_column_length, int M[][M_row_length]){
         for(j = 0; j < M_column_length; j++){
             printf("%-4d", M[i][j]);
             if(j == M_column_length - 1)
-            printf("\n");
+                printf("\n");
         }
     }
 
