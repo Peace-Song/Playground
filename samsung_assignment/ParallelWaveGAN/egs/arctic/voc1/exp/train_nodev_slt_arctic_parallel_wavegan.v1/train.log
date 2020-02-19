@@ -1,0 +1,300 @@
+# parallel-wavegan-train --config conf/parallel_wavegan.v1.yaml --train-dumpdir dump/train_nodev_slt/norm --dev-dumpdir dump/dev_slt/norm --outdir exp/train_nodev_slt_arctic_parallel_wavegan.v1 --resume "" --verbose 1 
+# Started at 2020. 02. 07. (금) 15:52:16 KST
+#
+2020-02-07 15:52:16,591 (train:508) INFO: sampling_rate = 16000
+2020-02-07 15:52:16,592 (train:508) INFO: fft_size = 1024
+2020-02-07 15:52:16,592 (train:508) INFO: hop_size = 256
+2020-02-07 15:52:16,592 (train:508) INFO: win_length = None
+2020-02-07 15:52:16,592 (train:508) INFO: window = hann
+2020-02-07 15:52:16,592 (train:508) INFO: num_mels = 80
+2020-02-07 15:52:16,592 (train:508) INFO: fmin = 80
+2020-02-07 15:52:16,592 (train:508) INFO: fmax = 7600
+2020-02-07 15:52:16,592 (train:508) INFO: global_gain_scale = 1.0
+2020-02-07 15:52:16,592 (train:508) INFO: trim_silence = False
+2020-02-07 15:52:16,592 (train:508) INFO: trim_threshold_in_db = 60
+2020-02-07 15:52:16,592 (train:508) INFO: trim_frame_size = 2048
+2020-02-07 15:52:16,592 (train:508) INFO: trim_hop_size = 512
+2020-02-07 15:52:16,592 (train:508) INFO: format = hdf5
+2020-02-07 15:52:16,592 (train:508) INFO: generator_params = {'in_channels': 1, 'out_channels': 1, 'kernel_size': 3, 'layers': 30, 'stacks': 3, 'residual_channels': 64, 'gate_channels': 128, 'skip_channels': 64, 'aux_channels': 80, 'aux_context_window': 2, 'dropout': 0.0, 'use_weight_norm': True, 'upsample_net': 'ConvInUpsampleNetwork', 'upsample_params': {'upsample_scales': [4, 4, 4, 4]}}
+2020-02-07 15:52:16,592 (train:508) INFO: discriminator_params = {'in_channels': 1, 'out_channels': 1, 'kernel_size': 3, 'layers': 10, 'conv_channels': 64, 'bias': True, 'use_weight_norm': True, 'nonlinear_activation': 'LeakyReLU', 'nonlinear_activation_params': {'negative_slope': 0.2}}
+2020-02-07 15:52:16,592 (train:508) INFO: stft_loss_params = {'fft_sizes': [1024, 2048, 512], 'hop_sizes': [120, 240, 50], 'win_lengths': [600, 1200, 240], 'window': 'hann_window'}
+2020-02-07 15:52:16,592 (train:508) INFO: lambda_adv = 4.0
+2020-02-07 15:52:16,592 (train:508) INFO: batch_size = 10
+2020-02-07 15:52:16,592 (train:508) INFO: batch_max_steps = 15360
+2020-02-07 15:52:16,592 (train:508) INFO: pin_memory = True
+2020-02-07 15:52:16,592 (train:508) INFO: num_workers = 2
+2020-02-07 15:52:16,592 (train:508) INFO: remove_short_samples = True
+2020-02-07 15:52:16,592 (train:508) INFO: allow_cache = True
+2020-02-07 15:52:16,592 (train:508) INFO: generator_optimizer_params = {'lr': 0.0001, 'eps': 1e-06, 'weight_decay': 0.0}
+2020-02-07 15:52:16,592 (train:508) INFO: generator_scheduler_params = {'step_size': 200000, 'gamma': 0.5}
+2020-02-07 15:52:16,592 (train:508) INFO: generator_grad_norm = 10
+2020-02-07 15:52:16,592 (train:508) INFO: discriminator_optimizer_params = {'lr': 5e-05, 'eps': 1e-06, 'weight_decay': 0.0}
+2020-02-07 15:52:16,592 (train:508) INFO: discriminator_scheduler_params = {'step_size': 200000, 'gamma': 0.5}
+2020-02-07 15:52:16,592 (train:508) INFO: discriminator_grad_norm = 1
+2020-02-07 15:52:16,592 (train:508) INFO: discriminator_train_start_steps = 100000
+2020-02-07 15:52:16,592 (train:508) INFO: train_max_steps = 400000
+2020-02-07 15:52:16,592 (train:508) INFO: save_interval_steps = 5000
+2020-02-07 15:52:16,592 (train:508) INFO: eval_interval_steps = 1000
+2020-02-07 15:52:16,592 (train:508) INFO: log_interval_steps = 100
+2020-02-07 15:52:16,592 (train:508) INFO: num_save_intermediate_results = 4
+2020-02-07 15:52:16,592 (train:508) INFO: train_dumpdir = dump/train_nodev_slt/norm
+2020-02-07 15:52:16,592 (train:508) INFO: dev_dumpdir = dump/dev_slt/norm
+2020-02-07 15:52:16,592 (train:508) INFO: outdir = exp/train_nodev_slt_arctic_parallel_wavegan.v1
+2020-02-07 15:52:16,592 (train:508) INFO: config = conf/parallel_wavegan.v1.yaml
+2020-02-07 15:52:16,592 (train:508) INFO: resume = 
+2020-02-07 15:52:16,592 (train:508) INFO: verbose = 1
+2020-02-07 15:52:16,593 (train:508) INFO: rank = 0
+2020-02-07 15:52:16,593 (train:508) INFO: distributed = False
+2020-02-07 15:52:16,593 (train:508) INFO: version = 0.2.7.post1
+2020-02-07 15:52:16,950 (audio_mel_dataset:65) WARNING: Some files are filtered by mel length threshold (932 -> 930).
+2020-02-07 15:52:19,237 (train:630) INFO: ParallelWaveGANGenerator(
+  (first_conv): Conv1d1x1(1, 64, kernel_size=(1,), stride=(1,))
+  (upsample_net): ConvInUpsampleNetwork(
+    (conv_in): Conv1d(80, 80, kernel_size=(5,), stride=(1,), bias=False)
+    (upsample): UpsampleNetwork(
+      (up_layers): ModuleList(
+        (0): Stretch2d()
+        (1): Conv2d(1, 1, kernel_size=(1, 9), stride=(1, 1), padding=(0, 4), bias=False)
+        (2): Stretch2d()
+        (3): Conv2d(1, 1, kernel_size=(1, 9), stride=(1, 1), padding=(0, 4), bias=False)
+        (4): Stretch2d()
+        (5): Conv2d(1, 1, kernel_size=(1, 9), stride=(1, 1), padding=(0, 4), bias=False)
+        (6): Stretch2d()
+        (7): Conv2d(1, 1, kernel_size=(1, 9), stride=(1, 1), padding=(0, 4), bias=False)
+      )
+    )
+  )
+  (conv_layers): ModuleList(
+    (0): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (1): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (2): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (3): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (4): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(16,), dilation=(16,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (5): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(32,), dilation=(32,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (6): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(64,), dilation=(64,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (7): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(128,), dilation=(128,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (8): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(256,), dilation=(256,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (9): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(512,), dilation=(512,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (10): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (11): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (12): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (13): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (14): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(16,), dilation=(16,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (15): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(32,), dilation=(32,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (16): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(64,), dilation=(64,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (17): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(128,), dilation=(128,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (18): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(256,), dilation=(256,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (19): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(512,), dilation=(512,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (20): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (21): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (22): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (23): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (24): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(16,), dilation=(16,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (25): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(32,), dilation=(32,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (26): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(64,), dilation=(64,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (27): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(128,), dilation=(128,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (28): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(256,), dilation=(256,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+    (29): ResidualBlock(
+      (conv): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(512,), dilation=(512,))
+      (conv1x1_aux): Conv1d1x1(80, 128, kernel_size=(1,), stride=(1,), bias=False)
+      (conv1x1_out): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+      (conv1x1_skip): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (last_conv_layers): ModuleList(
+    (0): ReLU(inplace=True)
+    (1): Conv1d1x1(64, 64, kernel_size=(1,), stride=(1,))
+    (2): ReLU(inplace=True)
+    (3): Conv1d1x1(64, 1, kernel_size=(1,), stride=(1,))
+  )
+)
+2020-02-07 15:52:19,237 (train:631) INFO: ParallelWaveGANDiscriminator(
+  (conv_layers): ModuleList(
+    (0): Conv1d(1, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (3): LeakyReLU(negative_slope=0.2, inplace=True)
+    (4): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+    (5): LeakyReLU(negative_slope=0.2, inplace=True)
+    (6): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(3,), dilation=(3,))
+    (7): LeakyReLU(negative_slope=0.2, inplace=True)
+    (8): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+    (9): LeakyReLU(negative_slope=0.2, inplace=True)
+    (10): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(5,), dilation=(5,))
+    (11): LeakyReLU(negative_slope=0.2, inplace=True)
+    (12): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(6,), dilation=(6,))
+    (13): LeakyReLU(negative_slope=0.2, inplace=True)
+    (14): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(7,), dilation=(7,))
+    (15): LeakyReLU(negative_slope=0.2, inplace=True)
+    (16): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+    (17): LeakyReLU(negative_slope=0.2, inplace=True)
+    (18): Conv1d(64, 1, kernel_size=(3,), stride=(1,), padding=(1,))
+  )
+)
+[train]:   0%|          | 0/400000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/peacesong/Workspace/ParallelWaveGAN/tools/venv/bin/parallel-wavegan-train", line 11, in <module>
+    load_entry_point('parallel-wavegan', 'console_scripts', 'parallel-wavegan-train')()
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/bin/train.py", line 653, in main
+    trainer.run()
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/bin/train.py", line 87, in run
+    self._train_epoch()
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/bin/train.py", line 211, in _train_epoch
+    self._train_step(batch)
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/bin/train.py", line 158, in _train_step
+    y_ = self.model["generator"](z, c)
+  File "/home/peacesong/Workspace/ParallelWaveGAN/tools/venv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 541, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/models/parallel_wavegan.py", line 140, in forward
+    x, h = f(x, c)
+  File "/home/peacesong/Workspace/ParallelWaveGAN/tools/venv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 541, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/peacesong/Workspace/ParallelWaveGAN/parallel_wavegan/layers/residual_block.py", line 125, in forward
+    x = torch.tanh(xa) * torch.sigmoid(xb)
+RuntimeError: CUDA out of memory. Tried to allocate 38.00 MiB (GPU 0; 1.96 GiB total capacity; 1.04 GiB already allocated; 30.81 MiB free; 21.07 MiB cached)
+[train]:   0%|          | 0/400000 [00:01<?, ?it/s]# Accounting: time=4 threads=1
+# Ended (code 1) at 2020. 02. 07. (금) 15:52:20 KST, elapsed time 4 seconds

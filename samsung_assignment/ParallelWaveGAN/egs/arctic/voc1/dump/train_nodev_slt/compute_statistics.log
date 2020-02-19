@@ -1,0 +1,9 @@
+# parallel-wavegan-compute-statistics --config conf/parallel_wavegan.v1.yaml --rootdir dump/train_nodev_slt/raw --dumpdir dump/train_nodev_slt --verbose 1 
+# Started at 2020. 02. 07. (금) 15:52:07 KST
+#
+2020-02-07 15:52:08,429 (compute_statistics:76) INFO: The number of files = 932.
+  0%|          | 0/932 [00:00<?, ?it/s] 16%|█▌        | 145/932 [00:00<00:00, 1448.60it/s] 33%|███▎      | 308/932 [00:00<00:00, 1496.59it/s] 50%|█████     | 466/932 [00:00<00:00, 1520.67it/s] 67%|██████▋   | 625/932 [00:00<00:00, 1538.62it/s] 84%|████████▍ | 787/932 [00:00<00:00, 1561.68it/s]100%|██████████| 932/932 [00:00<00:00, 1573.75it/s]
+2020-02-07 15:52:09,023 (utils:91) WARNING: Dataset in hdf5 file already exists. recreate dataset in hdf5.
+2020-02-07 15:52:09,024 (utils:91) WARNING: Dataset in hdf5 file already exists. recreate dataset in hdf5.
+# Accounting: time=2 threads=1
+# Ended (code 0) at 2020. 02. 07. (금) 15:52:09 KST, elapsed time 2 seconds
