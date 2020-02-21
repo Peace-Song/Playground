@@ -68,10 +68,11 @@ class ResidualBlock(tf.keras.layers.Layer):
                 padding = (kernel_size - 1) // 2 * dilation
         """
         # NOTE: subject to change
-        if use_causal_conv:
-            padding = "causal"
-        else:
-            padding = "same"
+        if padding is None:
+            if use_causal_conv:
+                padding = "causal"
+            else:
+                padding = "same"
 
         self.use_causal_conv = use_causal_conv
 
@@ -111,7 +112,7 @@ class ResidualBlock(tf.keras.layers.Layer):
         x = self.conv(x)
 
         # remove future time steps if use_causal_conv conv
-        x = x[:, :, int(residual.get_shape()[2])] if self.use_causal_conv else x
+        x = x[:, :, int(residual.get_shape()[-1])] if self.use_causal_conv else x
 
         # split into two part for gated activation
         splitdim = 1
