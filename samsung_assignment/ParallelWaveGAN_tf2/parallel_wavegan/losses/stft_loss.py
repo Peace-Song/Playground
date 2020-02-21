@@ -65,9 +65,7 @@ class LogSTFTMagnitudeLoss(tf.keras.layers.Layer):
             Tensor: Log STFT magnitude loss value.
 
         """
-        return tf.keras.losses.mean_absolute_error(
-            tf.math.log(y_mag), tf.math.log(x_mag)
-        )
+        return tf.keras.losses.mean_absolute_error(tf.math.log(y_mag), tf.math.log(x_mag))
 
 
 class STFTLoss(tf.keras.layers.Layer):
@@ -103,7 +101,7 @@ class STFTLoss(tf.keras.layers.Layer):
         return sc_loss, mag_loss
 
 
-class MultiResolutionSTFTLoss(torch.nn.Module):
+class MultiResolutionSTFTLoss(tf.keras.layers.Layer):
     """Multi resolution STFT loss module."""
 
     def __init__(self,
