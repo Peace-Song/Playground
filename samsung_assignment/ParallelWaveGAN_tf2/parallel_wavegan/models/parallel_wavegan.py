@@ -8,8 +8,8 @@ import math
 import tensorflow as tf
 import tensorflow_probability as tfp
 
-from tensorflow.keras.layers import Conv1D
 #from parallel_wavegan.layers import Conv1D
+from tensorflow.keras.layers import Conv1D
 from parallel_wavegan.layers import Conv1D1x1
 from parallel_wavegan.layers import ResidualBlock
 from parallel_wavegan.layers import upsample
@@ -116,7 +116,7 @@ class ParallelWaveGANGenerator(tf.keras.layers.Layer):
         if use_weight_norm:
             self.apply_weight_norm()
 
-    def forward(self, x, c):
+    def call(self, x, c):
         """Calculate forward propagation.
 
         Args:
@@ -242,7 +242,7 @@ class ParallelWaveGANDiscriminator(tf.keras.layers.Layer):
         if use_weight_norm:
             self.apply_weight_norm()
 
-    def forward(self, x):
+    def call(self, x):
         """Calculate forward propagation.
 
         Args:
@@ -365,7 +365,7 @@ class ResidualParallelWaveGANDiscriminator(torch.nn.Module):
         if use_weight_norm:
             self.apply_weight_norm()
 
-    def forward(self, x):
+    def call(self, x):
         """Calculate forward propagation.
 
         Args:

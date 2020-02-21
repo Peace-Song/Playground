@@ -54,7 +54,7 @@ class LogSTFTMagnitudeLoss(tf.keras.layers.Layer):
         """Initialize log STFT magnitude loss module."""
         super(LogSTFTMagnitudeLoss, self).__init__()
 
-    def forward(self, x_mag, y_mag):
+    def call(self, x_mag, y_mag):
         """Calculate forward propagation.
 
         Args:
@@ -81,7 +81,7 @@ class STFTLoss(tf.keras.layers.Layer):
         self.spectral_convergence_loss = SpectralConvergenceLoss()
         self.log_stft_magnitude_loss = LogSTFTMagnitudeLoss()
 
-    def forward(self, x, y):
+    def call(self, x, y):
         """Calculate forward propagation.
 
         Args:
@@ -124,7 +124,7 @@ class MultiResolutionSTFTLoss(tf.keras.layers.Layer):
         for fs, ss, wl in zip(fft_sizes, hop_sizes, win_lengths):
             self.stft_losses += [STFTLoss(fs, ss, wl, window)]
 
-    def forward(self, x, y):
+    def call(self, x, y):
         """Calculate forward propagation.
 
         Args:
