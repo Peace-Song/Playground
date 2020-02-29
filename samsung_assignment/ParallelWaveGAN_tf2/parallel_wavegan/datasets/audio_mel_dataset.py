@@ -8,9 +8,12 @@ import logging
 from multiprocessing import Manager
 
 import numpy as np
+import tensorflow as tf
 
-from torch.utils.data import Dataset
+from tensorflow.data import Dataset
+# [TORCH] from torch.utils.data import Dataset
 
+# Below does not use pytorch.
 from parallel_wavegan.utils import find_files
 from parallel_wavegan.utils import read_hdf5
 
@@ -44,6 +47,7 @@ class AudioMelDataset(Dataset):
 
         """
         # find all of audio and mel files
+        # output: list
         audio_files = sorted(find_files(root_dir, audio_query))
         mel_files = sorted(find_files(root_dir, mel_query))
 
