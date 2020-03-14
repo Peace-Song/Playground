@@ -4,67 +4,163 @@ def main():
   member_list = list()
   item_list = list()
 
-  while True:
-    name = input("Input a party member's name. Input EOF if done.\n")
-    
-    if name in [member.name for member in member_list]:
-      print("Duplicacy in member detected. try again.\n")
-      continue
+  print_logo()
 
-    if name == "EOF":
+  while True:
+    print_console()
+
+    command = input(">>> ")
+
+    if command == "INIT":
+      define_members(member_list)
+      define_items(member_list, item_list)
+
+    elif command == "SHOW":
+      show_member_info(member_list)
+    
+    elif command == "CALC":
+      calculate(member_list, item_list)
+    
+    elif command == "EXIT":
       break
 
-    purchase_item = input("Input what item did the member buy. Hit enter if none.\n")
+    else:
+      print("Invalid command.")
 
-    if purchase_item in [item.name for item in item_list]:
-      print("Duplicacy in item detected. try again.\n")
-      continue
+def define_members(member_list):
+  # Gets input of member names, create Member object, and append them to member_list.
+  while True:
+    # while-loop to cope with invalid input
+    print("Input party members' names, seperated by a space.")
+    names = input(">>> ").split()
 
-    purchase_amount = 0
-    if purchase_item != "":
-      purchase_amount = input("Input how much did the member spend.\n")
+    if names != []: # if input is not void
+      if len(names) == len(set(names)): # if there is no duplicate
+        break
+      else:
+        print("Party members' names must be diffrent to each other.")
+    else: 
+      print("At least 1 party member's name required.")
 
-    benefit_item_names = list()
-    while True:
-      benefit_item_name = input("Input what item did the member benefit from. Hit EOF if done.\n")
+  for name in names: # create Member object, append to member_list
+    member = Member(name)
+    member_list.append(member)
 
-      if benefit_item_name == "EOF":
+
+def define_items(member_list, item_list):
+  # Gets input of item names, create Item object, append them to member list,
+  # and update Member objects by calling add_purchased_items and add_benefitted_items methods.
+  while True:
+    # while-loop to cope with invalid input
+    print("Input items' names, seperated by a space.")
+    names = input(">>> ").split()
+
+    if names != []: # if input is not void
+      if len(names) == len(set(names)): # if there is no duplicate
+        break
+      else:
+        print("Items' names must be diffrent to each other.")
+    else: 
+      print("At least 1 item's name required.")
+
+  for name in names: # create Item object, append to item_list
+    print("How much was {item_name}?".format(item_name=name))
+    price = float(input(">>> "))
+
+    item = Item(name, price)
+    item_list.append(item)
+
+    while True: # update Member object by calling add_purchased_items
+      print("Who bought {item_name}?".format(item_name=name))
+      member_name = input(">>> ")
+
+      name_in_list = False
+      for member in member_list:
+        if member.name == member_name:
+          member.add_purchased_items(item)
+          name_in_list = True
+
+      if name_in_list == True: # if given name is in the member list
         break
 
-      benefit_item_names.append(benefit_item_name)
+      print("Name is not in the member list. Try again.")
+
+    while True: # update Member object by calling add_benefitted_items
+      print("Who were benefitted from {item_name}?".format(item_name=name))
+      member_names = input(">>> ").split()
+
+      for member_name in member_names:
+        name_in_list = False
+        for member in member_list:
+          if member.name == member_name:
+            name_in_list = True
+        
+        if name_in_list == False: # if given name is not in the member list
+          print("Name is not in the member list. Try again.")
+          continue
+
+      for member in member_list:
+        if member.name in member_names:
+          member.add_benefitted_items(item)
+        
+      break
 
 
-    new_member = Member(name, purchase_item, purchase_amount, benefit_item_names)
-    member_list.append(new_member)      
-      
-    if purchase_item != "":
-      new_item = Item(purchase_item, int(purchase_amount), name, 0)
-      item_list.append(new_item)
+def show_member_info(member_list):
+  # Show info of a member.
+  print("Input a member's name.")
+  name = input(">>> ")
 
-  calculate_benefiters_number(member_list, item_list)
-  personal_declarer(member_list, item_list)
-
-
-
-def calculate_benefiters_number(member_list, item_list):
   for member in member_list:
-    for benefit_item_name in member.benefit_item_names:
-      for item in item_list:
-        if benefit_item_name == item.name:
-          item.benefitee_number = item.benefitee_number + 1
+    if member.name == name:
+      member.show_member_info()
+      return
 
-def personal_declarer(member_list, item_list):
+  print("No matching name.")
+
+  return
+
+
+def calculate(member_list, item_list):
+  # Calculate each member's payment.
+  # balance > 0 means one should pay more, balance < 0 means one should be paid back.
   for member in member_list:
-    benefit_item_names = ""
-    paycheck_sum = 0
-    for benefit_item_name in member.benefit_item_names:
-      benefit_item_names = benefit_item_names + benefit_item_name + " "
-      for item in item_list:
-        if item.name == benefit_item_name:
-          paycheck_sum += item.price / item.benefitee_number
+    balance = 0.0 
+    
+    for purchased_item in member.purchased_items: 
+      balance -= purchased_item.price
 
-    print("{name} purchased item {purchase_item} and it costed {purchase_amount}." \
-      "{name} benefitted from item {benefitted_items}, thus has to pay {paycheck_amount}.".format(name=member.name, purchase_item=member.purchase_item, purchase_amount=member.purchase_amount, benefitted_items=benefit_item_names, paycheck_amount=paycheck_sum))
+    for benefitted_item in member.benefitted_items:
+      benefittee_num = 0
+      for _member in member_list: # calculate the number of benefittees of that item.
+        if benefitted_item in _member.benefitted_items:
+          benefittee_num += 1
+
+      balance += benefitted_item.price / benefittee_num
+    
+    if balance > 0:
+      print("{member_name} should pay {balance}.".format(member_name=member.name, balance=balance))
+    elif balance < 0:
+      print("{member_name} should be paid back {balance}.".format(member_name=member.name, balance=-balance))
+    else:
+      print("{member_name} doesn't need to pay for anything.".format(member_name=member.name))
+
+
+def print_console():
+  # Prints command options
+  print("-------------------------------------------")
+  print("MEMBER: Defines party members.")
+  print("ITEM: Defines party items.")
+  print("SHOW: Shows info about the member.")
+  print("RESULT: Shows the calculationi result.")
+  print("EXIT: Terminates the program.")
+  print("-------------------------------------------")
+
+def print_logo():
+  # Prints logo
+  print("==================================")
+  print("|            Bbumbbai            |")
+  print("==================================")
 
 if __name__ == "__main__":
   main()
