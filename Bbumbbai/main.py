@@ -149,8 +149,7 @@ def calculate(member_list, item_list):
 def print_console():
   # Prints command options
   print("-------------------------------------------")
-  print("MEMBER: Defines party members.")
-  print("ITEM: Defines party items.")
+  print("INIT: Initiates the program.")
   print("SHOW: Shows info about the member.")
   print("RESULT: Shows the calculationi result.")
   print("EXIT: Terminates the program.")
