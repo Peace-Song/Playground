@@ -13,3 +13,9 @@ class FlyNoWay implements FlyBehavior{
     System.out.println("Can not fly...");
   }
 }
+
+class FlyNuclearPowered implements FlyBehavior{
+  public void fly(){
+    System.out.println("Flying with nuclear reaction!");
+  }
+}
