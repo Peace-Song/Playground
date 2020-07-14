@@ -25,6 +25,10 @@ public abstract class Duck{
   public void swim(){
     System.out.println("Every duck can swim, including rubber duck.");
   }
+
+  public void display(){
+    System.out.println("I am a duck!");
+  }
 }
 
 class MallardDuck extends Duck{
