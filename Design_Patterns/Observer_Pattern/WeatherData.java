@@ -19,9 +19,7 @@ public class WeatherData implements Subject {
     }
 
     public void notifyObservers() {
-        for (Observer observer : this.observers) {
-            observer.update(this.temperature, this.humidity, this.pressure);
-        }
+        this.observers.forEach((observer) -> observer.update(this.temperature, this.humidity, this.pressure));
     }
 
     public void measurementsChanged() {
