@@ -1,3 +1,5 @@
 typescript/node_modules/**/*
 
 Design_Pattern/**/*.class
+
+*/**/__pycache__/**/*
