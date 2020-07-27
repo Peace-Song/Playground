@@ -1,5 +1,5 @@
 typescript/node_modules/**/*
 
-Design_Pattern/**/*.class
+Design_Patterns/**/*.class
 
 */**/__pycache__/**/*
