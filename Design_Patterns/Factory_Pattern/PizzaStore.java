@@ -1,4 +1,6 @@
 public abstract class PizzaStore {
+    PizzaIngredientFactory factory;
+
     public final Pizza orderPizza(String type) throws InterruptedException {
         Pizza pizza = this.createPizza(type);
         

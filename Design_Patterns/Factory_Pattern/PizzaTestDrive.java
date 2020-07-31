@@ -4,9 +4,9 @@ public class PizzaTestDrive {
         PizzaStore chicagoStore = ChicagoPizzaStore.makeChainStore();
 
         Pizza nyStyleCheesePizza = nyStore.orderPizza("cheese");
-        System.out.println("Arthur Morgan ordered a " + nyStyleCheesePizza.getName() + "\n");
+        System.out.println("Arthur Morgan ordered a " + nyStyleCheesePizza + "\n");
 
         Pizza chicagoStyleCheesePizza = chicagoStore.orderPizza("cheese");
-        System.out.println("Ellie ordered a " + chicagoStyleCheesePizza.getName() + "\n");
+        System.out.println("Ellie ordered a " + chicagoStyleCheesePizza + "\n");
     }
 }

@@ -1,26 +1,13 @@
-import java.util.ArrayList;
-
-public class Pizza {
+public abstract class Pizza {
     protected String name;
-    protected String dough;
-    protected String sauce;
-    protected ArrayList<String> toppings = new ArrayList<String>();
-    
-    public void prepare() throws InterruptedException {
-        System.out.println("Preparing " + this.name + "...");
-        Thread.sleep(1000);
-        
-        System.out.println("Tossing " + this.dough + "...");
-        Thread.sleep(1000);
+    protected Dough dough;
+    protected Sauce sauce;
+    protected Veggies veggies;
+    protected Cheese cheese;
+    protected Pepperoni pepperoni;
+    protected Clam clam;
 
-        System.out.println("Adding " + this.sauce + "...");
-        Thread.sleep(1000);
-
-        for (String aTopping : this.toppings)
-            System.out.print(aTopping + " ");
-        System.out.println("");
-        Thread.sleep(1000);
-    }
+    public abstract void prepare() throws InterruptedException;
 
     public void bake() throws InterruptedException {
         System.out.println("Bake for 25 minutes at 350");
@@ -37,31 +24,61 @@ public class Pizza {
         Thread.sleep(1000);
 
     }
-
-    public String getName() {
-        return this.name;
-    }
 }
 
 class NYStyleCheesePizza extends Pizza {
+    private PizzaIngredientFactory factory;
+
     public NYStyleCheesePizza() {
-        this.name = "NY Style Sauce and Cheese Pizza";
-        this.dough = "Thin Crust Dough";
-        this.sauce = "Marinara Sauce";
-        this.toppings.add("Grated Reggiano Cheese");
+        this.name = "NY Style Cheese Pizza";
+        this.factory = new NYPizzaIngredientFactory();
+    }
+
+    public void prepare() {
+        this.dough = this.factory.createDough();
+        this.sauce = this.factory.createSauce();
+        this.veggies = this.factory.createVeggies();
+        this.cheese = this.factory.createCheese();
+        this.clam = this.factory.createClam();
+    }
+
+    public String toString() {
+        return this.name + " with " + 
+            this.dough.getName() + ", " +
+            this.sauce.getName() + ", " +
+            this.veggies.getName() + ", " +
+            this.cheese.getName() + ", and " +
+            this.clam.getName();
     }
 }
 
 class ChicagoStyleCheesePizza extends Pizza {
+    private PizzaIngredientFactory factory;
+
     public ChicagoStyleCheesePizza() {
         this.name = "Chicago Style Deep Dish Cheese Pizza";
-        this.dough = "Extra Thick Crust Dough";
-        this.sauce = "Plum Tomato Sauce";
-        this.toppings.add("Shredded Mozzarella Cheese");
+        this.factory = new ChicagoPizzaIngredientFactory();
+    }
+
+    public void prepare() {
+        this.dough = this.factory.createDough();
+        this.sauce = this.factory.createSauce();
+        this.cheese = this.factory.createCheese();
+        this.pepperoni = this.factory.createPepperoni();
+        this.clam = this.factory.createClam();
     }
 
     public void cut() throws InterruptedException {
         System.out.println("Cutting the pizza into square slices");
         Thread.sleep(1000);
+    }
+
+    public String toString() {
+        return this.name + " with " + 
+        this.dough.getName() + ", " +
+        this.sauce.getName() + ", " +
+        this.cheese.getName() + ", " +
+        this.pepperoni.getName() + ", and " +
+        this.clam.getName();
     }
 }
