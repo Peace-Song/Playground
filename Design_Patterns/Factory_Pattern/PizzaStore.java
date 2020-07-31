@@ -1,8 +1,6 @@
 public abstract class PizzaStore {
     public final Pizza orderPizza(String type) throws InterruptedException {
-        Pizza pizza;
-
-        pizza = this.createPizza(type);
+        Pizza pizza = this.createPizza(type);
         
         pizza.prepare();
         pizza.bake();
