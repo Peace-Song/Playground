@@ -1,5 +1,5 @@
-typescript/node_modules/**/*
+*/**/node_modules
 
-Design_Patterns/**/*.class
+*/**/*.class
 
-*/**/__pycache__/**/*
+*/**/__pycache__
