@@ -1,6 +1,4 @@
 public abstract class PizzaStore {
-    PizzaIngredientFactory factory;
-
     public final Pizza orderPizza(String type) throws InterruptedException {
         Pizza pizza = this.createPizza(type);
         
@@ -17,17 +15,20 @@ public abstract class PizzaStore {
 
 class NYPizzaStore extends PizzaStore {
     protected Pizza createPizza(String item) {
+        Pizza pizza = null;
+        PizzaIngredientFactory factory = new NYPizzaIngredientFactory();
+
         if (item.equals("cheese")) {
-            return new NYStyleCheesePizza();
-        } /* else if (item.equals("veggie")) {
-            return new NYStyleVeggiePizza();
-        } else if (item.equals("clam")) {
+            pizza = new CheesePizza(factory);
+        } else if (item.equals("veggie")) {
+            pizza = new VeggiePizza(factory);
+        } /* else if (item.equals("clam")) {
             return new NYStyleClamPizza();
         } else if (item.equals("pepperoni")) {
             return new NYStylePepperoniPizza();
-        } */ else {
-            return null;
-        }
+        } */
+
+        return pizza;
     }
 
     public static NYPizzaStore makeChainStore() {
@@ -37,17 +38,20 @@ class NYPizzaStore extends PizzaStore {
 
 class ChicagoPizzaStore extends PizzaStore {
     protected Pizza createPizza(String item) {
+        Pizza pizza = null;
+        PizzaIngredientFactory factory = new ChicagoPizzaIngredientFactory();
+        
         if (item.equals("cheese")) {
-            return new ChicagoStyleCheesePizza();
-        } /* else if (item.equals("veggie")) {
-            return new ChicagoStyleVeggiePizza();
-        } else if (item.equals("clam")) {
-            return new ChicagoStyleClamPizza();
+            pizza = new CheesePizza(factory);
+        } else if (item.equals("veggie")) {
+            pizza = new VeggiePizza(factory);
+        } /* else if (item.equals("clam")) {
+            return new NYStyleClamPizza();
         } else if (item.equals("pepperoni")) {
-            return new ChicagoStylePepperoniPizza();
-        } */ else {
-            return null;
-        } 
+            return new NYStylePepperoniPizza();
+        } */
+
+        return pizza;
     }
 
     public static ChicagoPizzaStore makeChainStore() {

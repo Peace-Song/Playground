@@ -26,12 +26,12 @@ public abstract class Pizza {
     }
 }
 
-class NYStyleCheesePizza extends Pizza {
+class CheesePizza extends Pizza {
     private PizzaIngredientFactory factory;
 
-    public NYStyleCheesePizza() {
-        this.name = "NY Style Cheese Pizza";
-        this.factory = new NYPizzaIngredientFactory();
+    public CheesePizza(PizzaIngredientFactory factory) {
+        this.name = "Cheese Pizza";
+        this.factory = factory;
     }
 
     public void prepare() {
@@ -43,7 +43,8 @@ class NYStyleCheesePizza extends Pizza {
     }
 
     public String toString() {
-        return this.name + " with " + 
+        return this.factory.getStyle() + " " + 
+            this.name + " with " + 
             this.dough.getName() + ", " +
             this.sauce.getName() + ", " +
             this.veggies.getName() + ", " +
@@ -52,12 +53,12 @@ class NYStyleCheesePizza extends Pizza {
     }
 }
 
-class ChicagoStyleCheesePizza extends Pizza {
+class VeggiePizza extends Pizza {
     private PizzaIngredientFactory factory;
 
-    public ChicagoStyleCheesePizza() {
-        this.name = "Chicago Style Deep Dish Cheese Pizza";
-        this.factory = new ChicagoPizzaIngredientFactory();
+    public VeggiePizza(PizzaIngredientFactory factory) {
+        this.name = "Veggie Pizza";
+        this.factory = factory;
     }
 
     public void prepare() {
@@ -74,11 +75,12 @@ class ChicagoStyleCheesePizza extends Pizza {
     }
 
     public String toString() {
-        return this.name + " with " + 
-        this.dough.getName() + ", " +
-        this.sauce.getName() + ", " +
-        this.cheese.getName() + ", " +
-        this.pepperoni.getName() + ", and " +
-        this.clam.getName();
+        return this.factory.getStyle() + " " + 
+            this.name + " with " + 
+            this.dough.getName() + ", " +
+            this.sauce.getName() + ", " +
+            this.cheese.getName() + ", " +
+            this.pepperoni.getName() + ", and " +
+            this.clam.getName();
     }
 }

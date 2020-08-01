@@ -1,4 +1,5 @@
 public interface PizzaIngredientFactory {
+    public String getStyle();
     public Dough createDough();
     public Sauce createSauce();
     public Cheese createCheese();
@@ -8,6 +9,10 @@ public interface PizzaIngredientFactory {
 }
 
 class NYPizzaIngredientFactory implements PizzaIngredientFactory {
+    public String getStyle() {
+        return "New York Style";
+    }
+
     public Dough createDough() {
         return new ThinCrustDough();
     }
@@ -34,6 +39,10 @@ class NYPizzaIngredientFactory implements PizzaIngredientFactory {
 }
 
 class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory {
+    public String getStyle() {
+        return "Chicago Style";
+    }
+
     public Dough createDough() {
         return new ThickCrustDough();
     }
