@@ -1,5 +1,6 @@
 public interface Command {
     public void execute();
+    public void undo();
 }
 
 class LightOnCommand implements Command {
@@ -11,6 +12,10 @@ class LightOnCommand implements Command {
 
     public void execute() {
         this.light.on();
+    }
+
+    public void undo() {
+        this.light.off();
     }
 }
 
@@ -24,6 +29,10 @@ class LightOffCommand implements Command {
     public void execute() {
         this.light.off();
     }
+
+    public void undo() {
+        this.light.on();
+    }
 }
 
 class GarageDoorOpenCommand implements Command {
@@ -36,6 +45,10 @@ class GarageDoorOpenCommand implements Command {
     public void execute() {
         this.door.up();
     }
+
+    public void undo() {
+        this.door.down();
+    }
 }
 
 class GarageDoorCloseCommand implements Command {
@@ -47,6 +60,10 @@ class GarageDoorCloseCommand implements Command {
 
     public void execute() {
         this.door.down();
+    }
+
+    public void undo() {
+        this.door.up();
     }
 }
 
@@ -62,6 +79,10 @@ class StereoOnWithCDCommand implements Command {
         this.stereo.setCD();
         this.stereo.setVolume(10);
     }
+
+    public void undo() {
+        this.stereo.off();
+    }
 }
 
 class StereoOffCommand implements Command {
@@ -74,33 +95,148 @@ class StereoOffCommand implements Command {
     public void execute() {
         this.stereo.off();
     }
+
+    public void undo() {
+        this.stereo.on();
+        this.stereo.setCD();
+        this.stereo.setVolume(10);
+    }
 }
 
-class CeilingFanOnCommand implements Command {
+class CeilingFanHighCommand implements Command {
     CeilingFan fan;
+    int prevSpeed;
 
-    public CeilingFanOnCommand(CeilingFan fan) {
+    public CeilingFanHighCommand(CeilingFan fan) {
         this.fan = fan;
     }
 
     public void execute() {
-        this.fan.on();
+        this.prevSpeed = this.fan.getSpeed();
+        this.fan.high();
+    }
+
+    public void undo() {
+        switch (this.prevSpeed) {
+            case CeilingFan.HIGH:
+                this.fan.high();
+                break;
+            case CeilingFan.MEDIUM:
+                this.fan.medium();
+                break;
+            case CeilingFan.LOW:
+                this.fan.low();
+                break;
+            case CeilingFan.OFF:
+                this.fan.off();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+class CeilingFanMediumCommand implements Command {
+    CeilingFan fan;
+    int prevSpeed;
+
+    public CeilingFanMediumCommand(CeilingFan fan) {
+        this.fan = fan;
+    }
+
+    public void execute() {
+        this.prevSpeed = this.fan.getSpeed();
+        this.fan.medium();
+    }
+
+    public void undo() {
+        switch (this.prevSpeed) {
+            case CeilingFan.HIGH:
+                this.fan.high();
+                break;
+            case CeilingFan.MEDIUM:
+                this.fan.medium();
+                break;
+            case CeilingFan.LOW:
+                this.fan.low();
+                break;
+            case CeilingFan.OFF:
+                this.fan.off();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+class CeilingFanLowCommand implements Command {
+    CeilingFan fan;
+    int prevSpeed;
+
+    public CeilingFanLowCommand(CeilingFan fan) {
+        this.fan = fan;
+    }
+
+    public void execute() {
+        this.prevSpeed = this.fan.getSpeed();
+        this.fan.low();
+    }
+
+    public void undo() {
+        switch (this.prevSpeed) {
+            case CeilingFan.HIGH:
+                this.fan.high();
+                break;
+            case CeilingFan.MEDIUM:
+                this.fan.medium();
+                break;
+            case CeilingFan.LOW:
+                this.fan.low();
+                break;
+            case CeilingFan.OFF:
+                this.fan.off();
+                break;
+            default:
+                break;
+        }
     }
 }
 
 class CeilingFanOffCommand implements Command {
     CeilingFan fan;
+    int prevSpeed;
 
     public CeilingFanOffCommand(CeilingFan fan) {
         this.fan = fan;
     }
 
     public void execute() {
+        this.prevSpeed = this.fan.getSpeed();
         this.fan.off();
+    }
+
+    public void undo() {
+        switch (this.prevSpeed) {
+            case CeilingFan.HIGH:
+                this.fan.high();
+                break;
+            case CeilingFan.MEDIUM:
+                this.fan.medium();
+                break;
+            case CeilingFan.LOW:
+                this.fan.low();
+                break;
+            case CeilingFan.OFF:
+                this.fan.off();
+                break;
+            default:
+                break;
+        }
     }
 }
 
 // "null object" to not take care of null
 class NoCommand implements Command {
-    public void execute() {}
+    public void execute() { }
+    public void undo() { }
 }

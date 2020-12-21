@@ -15,7 +15,7 @@ public class RemoteControlTest {
         GarageDoorCloseCommand garageDoorClose = new GarageDoorCloseCommand(garageDoor);
 
         CeilingFan ceilingFan = new CeilingFan("Living room");
-        CeilingFanOnCommand ceilingFanOn = new CeilingFanOnCommand(ceilingFan);
+        CeilingFanHighCommand ceilingFanOn = new CeilingFanHighCommand(ceilingFan);
         CeilingFanOffCommand ceilingFanOff = new CeilingFanOffCommand(ceilingFan);
 
         Stereo stereo = new Stereo("Living room");
@@ -39,5 +39,19 @@ public class RemoteControlTest {
         remoteControl.onPressOffButton(3);
         remoteControl.onPressOnButton(4);
         remoteControl.onPressOffButton(4);
+
+        remoteControl.onPressUndoButton();
+
+        Command[] livingRoomOn = {livingRoomLightOn, ceilingFanOn, stereoOnWithCD};
+        Command[] livingRoomOff = {livingRoomLightOff, ceilingFanOff, stereoOff};
+
+        MacroCommand onMacro = new MacroCommand(livingRoomOn);
+        MacroCommand offMacro = new MacroCommand(livingRoomOff);
+
+        remoteControl.setCommand(0, onMacro, offMacro);
+        System.out.println("----------------MACRO ON----------------");
+        remoteControl.onPressOnButton(0);
+        System.out.println("----------------MACRO OFF---------------");
+        remoteControl.onPressOffButton(0);
     }
 }
