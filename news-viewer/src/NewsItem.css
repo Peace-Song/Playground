@@ -1,0 +1,28 @@
+.newsItem {
+  display: flex;
+}
+.thumbnail {
+  margin-right: 1rem;
+}
+.thumbnail img {
+  display: block;
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+}
+.contents h2 {
+  margin: 0px;
+}
+.contents h2 a {
+  color: black;
+}
+.contents p {
+  margin: 0px;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  white-space: normal;
+}
+.contents + .contents {
+  margin-top: 3rem;
+}
+

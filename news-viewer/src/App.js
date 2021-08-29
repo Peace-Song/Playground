@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import NewsList from './NewsList';
 
 const url = 'https://newsapi.org/v2/top-headlines?';
 const apiKey = 'c311c58398d342c5b7be86d81885fabc';
@@ -31,15 +32,15 @@ const App = () => {
     };
   };
 
+  const articles = data?.articles;
+  console.log(articles)
+
   return (
     <div>
       <button onClick={onClick}>Load</button>
-      {data && (
-        <textarea rows={7} value={JSON.stringify(data, null, 2)} />
-      )}
+      {articles && <NewsList articles={articles} />}
     </div>
-  )
-
+  );
 };
 
 export default App;
