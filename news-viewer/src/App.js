@@ -1,45 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import Categories from './Categories';
 import NewsList from './NewsList';
 
-const url = 'https://newsapi.org/v2/top-headlines?';
-const apiKey = 'c311c58398d342c5b7be86d81885fabc';
-const country = 'kr';
-
-const getUrlParamsFromObj = (obj) => {
-  return Object.keys(obj).reduce((prev, curr, idx) => {
-    const url = prev + `${curr.toString()}=${obj[curr]}`
-    if (idx + 1 !== Object.keys(obj).length) {
-      return url + '&'
-    }
-    return url
-  }, '')
-}
+import { categories } from './const'
 
 const App = () => {
-  const [data, setData] = useState();
-  const onClick = async () => {
-    const params = {
-      country,
-      apiKey
-    };
-    
-    try {
-      const response = await axios.get(url + getUrlParamsFromObj(params));
-      setData(response?.data);
-    } catch (e) {
-      console.log(e);
-    };
-  };
-
-  const articles = data?.articles;
-  console.log(articles)
-
+  const [category, setCategory] = useState(categories[0]);
+  
   return (
-    <div>
-      <button onClick={onClick}>Load</button>
-      {articles && <NewsList articles={articles} />}
-    </div>
+    <>
+      <Categories {...{category, setCategory}} />
+      <NewsList category={category} />
+    </>
   );
 };
 
