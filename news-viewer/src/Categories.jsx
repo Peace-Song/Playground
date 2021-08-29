@@ -1,21 +1,24 @@
 import React from 'react';
-import cx from 'classnames';
+import { NavLink } from 'react-router-dom';
+
 
 import { categories } from './const';
 
 import './Categories.css'
 
-const Categories = ({ category, setCategory }) => {
+const Categories = () => {
   return (
     <div className={'categories'}>
-      {categories.map((aCategory) => (
-        <div 
-          key={aCategory.name} 
-          className={cx('category', category === aCategory && 'active')}
-          onClick={() => setCategory(aCategory)}
+      {categories.map((category) => (
+        <NavLink 
+          key={category.name} 
+          className={'category'}
+          activeClassName={'active'}
+          exact={category === categories[0]}
+          to={category === categories[0] ? `/` : `/${category.name}`}
         >
-          {aCategory.text}
-        </div>
+          {category.text}
+        </NavLink>
       ))}
     </div>
   );

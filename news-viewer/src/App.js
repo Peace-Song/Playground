@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
-import Categories from './Categories';
-import NewsList from './NewsList';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import NewsPage from './NewsPage';
 
-import { categories } from './const'
-
-const App = () => {
-  const [category, setCategory] = useState(categories[0]);
-  
+const App = () => {  
   return (
-    <>
-      <Categories {...{category, setCategory}} />
-      <NewsList category={category} />
-    </>
+    <Route path={'/:category?'} component={NewsPage} />
   );
 };
 
